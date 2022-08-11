@@ -363,12 +363,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" class="post-category">
+                                杂七杂八
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -427,15 +440,15 @@
 <hr>
 <h2 id="三、GitHub-page"><a href="#三、GitHub-page" class="headerlink" title="三、GitHub page"></a>三、GitHub page</h2><p>每个用户只能有一个GitHub page，所以新建仓库命名必须为&lt;你的用户名&gt;.github.io</p>
 <p>在博客根目录git bash，配置参数</p>
-<p>其中 username 和 <a href="mailto:&#x75;&#115;&#x65;&#x72;&#110;&#x61;&#x6d;&#x65;&#64;&#x58;&#x58;&#x58;&#x2e;&#x63;&#111;&#109;">&#x75;&#115;&#x65;&#x72;&#110;&#x61;&#x6d;&#x65;&#64;&#x58;&#x58;&#x58;&#x2e;&#x63;&#111;&#109;</a> 是你注册 GitHub 的用户名和邮箱</p>
-<p>git config –global user.name “username”<br>git config –global user.email “<a href="mailto:&#x75;&#x73;&#101;&#114;&#x6e;&#97;&#109;&#x65;&#64;&#88;&#x58;&#88;&#x2e;&#x63;&#x6f;&#109;">&#x75;&#x73;&#101;&#114;&#x6e;&#97;&#109;&#x65;&#64;&#88;&#x58;&#88;&#x2e;&#x63;&#x6f;&#109;</a>“</p>
+<p>其中 username 和 <a href="mailto:&#x75;&#x73;&#x65;&#x72;&#110;&#97;&#x6d;&#x65;&#x40;&#x58;&#88;&#88;&#x2e;&#x63;&#111;&#x6d;">&#x75;&#x73;&#x65;&#x72;&#110;&#97;&#x6d;&#x65;&#x40;&#x58;&#88;&#88;&#x2e;&#x63;&#111;&#x6d;</a> 是你注册 GitHub 的用户名和邮箱</p>
+<p>git config –global user.name “username”<br>git config –global user.email “<a href="mailto:&#x75;&#115;&#101;&#114;&#x6e;&#x61;&#109;&#x65;&#64;&#x58;&#x58;&#88;&#x2e;&#x63;&#111;&#x6d;">&#x75;&#115;&#101;&#114;&#x6e;&#x61;&#109;&#x65;&#64;&#x58;&#x58;&#88;&#x2e;&#x63;&#111;&#x6d;</a>“</p>
 <p>生成SSH keys并且添加到GitHub里</p>
-<p>其中 <a href="mailto:&#x75;&#115;&#x65;&#114;&#x6e;&#x61;&#109;&#101;&#x40;&#88;&#x58;&#88;&#x2e;&#99;&#x6f;&#109;">&#x75;&#115;&#x65;&#114;&#x6e;&#x61;&#109;&#101;&#x40;&#88;&#x58;&#88;&#x2e;&#99;&#x6f;&#109;</a> 是你注册 GitHub 的邮箱</p>
-<p> ssh-keygen -t rsa -C “<a href="mailto:&#117;&#115;&#x65;&#114;&#x6e;&#97;&#x6d;&#x65;&#x40;&#88;&#88;&#x58;&#x2e;&#99;&#111;&#109;">&#117;&#115;&#x65;&#114;&#x6e;&#97;&#x6d;&#x65;&#x40;&#88;&#88;&#x58;&#x2e;&#99;&#111;&#109;</a>“</p>
+<p>其中 <a href="mailto:&#x75;&#x73;&#101;&#x72;&#110;&#x61;&#109;&#x65;&#64;&#88;&#88;&#88;&#x2e;&#x63;&#111;&#109;">&#x75;&#x73;&#101;&#x72;&#110;&#x61;&#109;&#x65;&#64;&#88;&#88;&#88;&#x2e;&#x63;&#111;&#109;</a> 是你注册 GitHub 的邮箱</p>
+<p> ssh-keygen -t rsa -C “<a href="mailto:&#x75;&#x73;&#x65;&#114;&#110;&#97;&#x6d;&#x65;&#64;&#88;&#x58;&#88;&#46;&#x63;&#111;&#x6d;">&#x75;&#x73;&#x65;&#114;&#110;&#97;&#x6d;&#x65;&#64;&#88;&#x58;&#88;&#46;&#x63;&#111;&#x6d;</a>“</p>
 <hr>
 <h2 id="四、发布"><a href="#四、发布" class="headerlink" title="四、发布"></a>四、发布</h2><p>打开博客根目录下的配置文件更改添加</p>
 <p>其中 xxxxxx 是前面多次用到的你的GitHub用户名</p>
-<p>deploy:<br>  type: git<br>  repo: <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#103;&#105;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a>:xxxxxx&#x2F;xxxxxx.github.io.git<br>  branch: main</p>
+<p>deploy:<br>  type: git<br>  repo: <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#109;</a>:xxxxxx&#x2F;xxxxxx.github.io.git<br>  branch: main</p>
 <p>最后</p>
 <p>hexo g &amp;&amp; hexo s</p>
 <p>结束</p>
@@ -465,7 +478,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/08/11/%E5%A6%82%E4%BD%95%E7%94%A820%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">http://example.com/2022/08/11/%E5%A6%82%E4%BD%95%E7%94%A820%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</a>
+                    <a href="https://joyce-art.github.io/2022/08/11/%E5%A6%82%E4%BD%95%E7%94%A820%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">https://joyce-art.github.io/2022/08/11/%E5%A6%82%E4%BD%95%E7%94%A820%E5%88%86%E9%92%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -502,7 +515,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -607,13 +624,25 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Joyce
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" class="post-category">
+                                    杂七杂八
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1101,6 +1130,6 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
