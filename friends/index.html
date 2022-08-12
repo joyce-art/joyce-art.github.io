@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, ctf,web,JavaScript,HTML,PHP,Python">
-    <meta name="description" content="����վ����������Ȥ���ã���¼һЩ�����Ӱˡ�ѧϰ�ʼǡ���������ȵ�">
+    <meta name="keywords" content="friends, Joyce&#39;s blog">
+    <meta name="description" content="Joyce&#39;s blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -52,7 +52,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -171,7 +171,7 @@
         <div class="logo-name">Joyce&#39;s blog</div>
         <div class="logo-desc">
             
-            ����վ����������Ȥ���ã���¼һЩ�����Ӱˡ�ѧϰ�ʼǡ���������ȵ�
+            Never really desperate, only the lost of the soul.
             
         </div>
     </div>
@@ -337,7 +337,7 @@
         <div class="brand">
             <div class="title center-align">
                 
-                ѧ�����Ŀ�����
+                    subtitle
                 
             </div>
 
@@ -348,10 +348,6 @@
                 <script>
                     var typed = new Typed("#subtitle", {
                         strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
                             
                                 "所谓觉悟，就是在漆黑的荒野上开辟出一条理当前进的光明大道。",
                             
@@ -369,9 +365,9 @@
                             
                         ],
                         startDelay: 300,
-                        typeSpeed: 100,
+                        typeSpeed: 150,
                         loop: true,
-                        backSpeed: 50,
+                        backSpeed: 100,
                         showCursor: true
                     });
                 </script>
@@ -956,6 +952,9 @@
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">4.6k</span>
+            
             
             
                 
@@ -1165,6 +1164,14 @@ $(function () {
     
 
     <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 鼠标星星特效 -->
