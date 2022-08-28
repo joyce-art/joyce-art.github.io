@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title>bootstrap</title>
-      <link href="/2022/08/13/bootstrap/"/>
-      <url>/2022/08/13/bootstrap/</url>
+      <title>文件上传</title>
+      <link href="/2022/08/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+      <url>/2022/08/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -17,9 +17,9 @@
     
     
     <entry>
-      <title>CSS</title>
-      <link href="/2022/08/13/CSS/"/>
-      <url>/2022/08/13/CSS/</url>
+      <title>XSS跨站脚本攻击</title>
+      <link href="/2022/08/28/XSS%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/"/>
+      <url>/2022/08/28/XSS%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -30,13 +30,32 @@
     
     
     <entry>
-      <title>html标签</title>
-      <link href="/2022/08/13/html%E6%A0%87%E7%AD%BE/"/>
-      <url>/2022/08/13/html%E6%A0%87%E7%AD%BE/</url>
+      <title>SQL注入</title>
+      <link href="/2022/08/28/SQL%E6%B3%A8%E5%85%A5/"/>
+      <url>/2022/08/28/SQL%E6%B3%A8%E5%85%A5/</url>
       
         <content type="html"><![CDATA[]]></content>
       
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>文件包含</title>
+      <link href="/2022/08/28/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+      <url>/2022/08/28/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>服务器执行PHP文件时，可以通过文件包含函数加载另一个文件中的PHP代码，并且当PHP来执行，这会为开发者节省大量的时间。这意味着您可以创建供所有网页引用的标准页眉或菜单文件。当页眉需要更新时，您只更新一个包含文件就可以了，或者当您向网站添加一张新页面时，仅仅需要修改一下菜单文件（而不是更新所有网页中的链接）。</p><h2 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h2><p>php中引发文件包含漏洞的通常是以下四个函数：</p><ol><li><a href="http://www.php.net/manual/en/function.include.php">include()</a></li><li><a href="http://php.net/manual/en/function.include-once.php">include_once()</a></li><li><a href="http://php.net/manual/en/function.require.php">require()</a></li><li><a href="http://php.net/manual/en/function.require-once.php">require_once()</a></li></ol><p>require()如果在包含的过程中有错，比如文件不存在等，则会直接退出，不执行后续语句。</p><p>include()如果出错的话，只会提出警告，会继续执行后续语句。</p><p>而require_once()和include_once()与require()和include()类似。</p><p>但是如果一个文件已经被包含过了，则require_once()和include_once()则不会再包含它，以避免函数重定义或者变量赋值等问题。</p><h2 id="漏洞产生原因"><a href="#漏洞产生原因" class="headerlink" title="漏洞产生原因"></a>漏洞产生原因</h2><pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>    <span class="token variable">$filename</span>  <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'filename'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span></code></pre><p>文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。</p><p>例如：</p><p><code>$_GET[&#39;filename&#39;]</code>参数开发者没有经过严格的过滤，直接带入了include的函数，攻击者可以修改<code>$_GET[&#39;filename&#39;]</code>的值，执行非预期的操作。</p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>利用条件：</strong></p><blockquote><p>（1）include()等函数通过动态变量的方式引入包含文件； （2）用户能够控制该动态变量。</p></blockquote><p><strong>1、读取敏感文件</strong></p><pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>/etc/passwd</code></pre><h3 id="2、利用封装协议读源码"><a href="#2、利用封装协议读源码" class="headerlink" title="2、利用封装协议读源码"></a><strong>2、利用封装协议读源码</strong></h3><pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>php://filter/read<span class="token operator">=</span>convert.base64-encode/resource<span class="token operator">=</span>config.php<span class="token comment" spellcheck="true">#这样能看到php文件的源码</span></code></pre><p>php:&#x2F;&#x2F;filter可以作为一个中间流来处理其他流。<br>resource&#x3D;&lt;要过滤的数据流&gt;这个参数是必须的。它指定了你要筛选过滤的数据流。<br>read&#x3D;&lt;读链的筛选列表&gt;该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>write&#x3D;&lt;写链的筛选列表&gt;该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>&lt;；两个链的筛选列表&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀 的筛选器列表会视情况应用于读或写链。</p><p>convert.base64</p><p>convert.base64-encode和 convert.base64-decode使用这两个过滤器等同于分别用base64_encode()和base64_decode()函数处理所有的流数据。convert.base64-encode支持以一个关联数组给出的参数。如果给出了line-length，base64 输出将被用line-length个字符为 长度而截成块。如果给出了line-break-chars，每块将被用给出的字符隔开。这些参数的效果和用base64_encode()再加上 chunk_split()相同。<br>convert.quoted</p><p>convert.quoted-printable-encode和convert.quoted-printable-decode使用此过滤器的decode版本等同于用 quoted_printable_decode()函数处理所有的流数据。没有和convert.quoted-printable-encode相对应的函数。convert.quoted-printable-encode支持以一个关联数组给出的参数。除了支持和convert.base64-encode一样的附加参数外，convert.quoted-printable-encode还支持布尔参数binary和 force-encode-first。convert.base64-decode只支持line-break-chars参数作为从编码载荷中剥离的类型提示。<br>convert.iconv.*</p><p>这个过滤器需要php支持 iconv ，而iconv是默认编译的。使用convert.iconv.*过滤器等同于用iconv()函数处理所有的流数据。</p><p>iconv — 字符串按要求的字符编码来转换</p><p>convery.iconv.*的使用有两种方法:</p><pre class=" language-bash"><code class="language-bash">convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>.<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span> or convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>/<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span></code></pre><h3 id="3、包含图片Getshell"><a href="#3、包含图片Getshell" class="headerlink" title="3、包含图片Getshell"></a><strong>3、包含图片Getshell</strong></h3><p>在上传的图片中写入恶意代码，然后用 LFI 包含调用，就会执行图片里的PHP代码</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -62,19 +81,6 @@
             <tag> 书单 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>图解HTTP</title>
-      <link href="/2022/08/12/%E5%9B%BE%E8%A7%A3HTTP/"/>
-      <url>/2022/08/12/%E5%9B%BE%E8%A7%A3HTTP/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
@@ -136,19 +142,6 @@
       <url>/2022/08/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
       
         <content type="html"><![CDATA[<p>hope，是希望的意思</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2022/08/11/hello-world/"/>
-      <url>/2022/08/11/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
       
       

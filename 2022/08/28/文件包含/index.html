@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="图解HTTP, Joyce&#39;s blog">
-    <meta name="description" content="">
+    <meta name="keywords" content="文件包含, Joyce&#39;s blog">
+    <meta name="description" content="一、简介服务器执行PHP文件时，可以通过文件包含函数加载另一个文件中的PHP代码，并且当PHP来执行，这会为开发者节省大量的时间。这意味着您可以创建供所有网页引用的标准页眉或菜单文件。当页眉需要更新时，您只更新一个包含文件就可以了，或者当您">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>图解HTTP | Joyce&#39;s blog</title>
+    <title>文件包含 | Joyce&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -352,7 +352,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">图解HTTP</h1>
+                    <h1 class="description center-align post-title">文件包含</h1>
                 </div>
             </div>
         </div>
@@ -374,9 +374,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -388,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-12
+                    2022-08-28
                 </div>
                 
 
@@ -397,14 +401,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    994
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -424,7 +428,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>服务器执行PHP文件时，可以通过文件包含函数加载另一个文件中的PHP代码，并且当PHP来执行，这会为开发者节省大量的时间。这意味着您可以创建供所有网页引用的标准页眉或菜单文件。当页眉需要更新时，您只更新一个包含文件就可以了，或者当您向网站添加一张新页面时，仅仅需要修改一下菜单文件（而不是更新所有网页中的链接）。</p>
+<h2 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h2><p>php中引发文件包含漏洞的通常是以下四个函数：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://www.php.net/manual/en/function.include.php">include()</a></li>
+<li><a target="_blank" rel="noopener" href="http://php.net/manual/en/function.include-once.php">include_once()</a></li>
+<li><a target="_blank" rel="noopener" href="http://php.net/manual/en/function.require.php">require()</a></li>
+<li><a target="_blank" rel="noopener" href="http://php.net/manual/en/function.require-once.php">require_once()</a></li>
+</ol>
+<p>require()如果在包含的过程中有错，比如文件不存在等，则会直接退出，不执行后续语句。</p>
+<p>include()如果出错的话，只会提出警告，会继续执行后续语句。</p>
+<p>而require_once()和include_once()与require()和include()类似。</p>
+<p>但是如果一个文件已经被包含过了，则require_once()和include_once()则不会再包含它，以避免函数重定义或者变量赋值等问题。</p>
+<h2 id="漏洞产生原因"><a href="#漏洞产生原因" class="headerlink" title="漏洞产生原因"></a>漏洞产生原因</h2><pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$filename</span>  <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'filename'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+</code></pre>
+<p>文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码。</p>
+<p>例如：</p>
+<p><code>$_GET[&#39;filename&#39;]</code>参数开发者没有经过严格的过滤，直接带入了include的函数，攻击者可以修改<code>$_GET[&#39;filename&#39;]</code>的值，执行非预期的操作。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>利用条件：</strong></p>
+<blockquote>
+<p>（1）include()等函数通过动态变量的方式引入包含文件； （2）用户能够控制该动态变量。</p>
+</blockquote>
+<p><strong>1、读取敏感文件</strong></p>
+<pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>/etc/passwd
+</code></pre>
+<h3 id="2、利用封装协议读源码"><a href="#2、利用封装协议读源码" class="headerlink" title="2、利用封装协议读源码"></a><strong>2、利用封装协议读源码</strong></h3><pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>php://filter/read<span class="token operator">=</span>convert.base64-encode/resource<span class="token operator">=</span>config.php	<span class="token comment" spellcheck="true">#这样能看到php文件的源码</span>
+</code></pre>
+<p>php:&#x2F;&#x2F;filter可以作为一个中间流来处理其他流。<br>resource&#x3D;&lt;要过滤的数据流&gt;	这个参数是必须的。它指定了你要筛选过滤的数据流。<br>read&#x3D;&lt;读链的筛选列表&gt;	该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>write&#x3D;&lt;写链的筛选列表&gt;	该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>&lt;；两个链的筛选列表&gt;	任何没有以 read&#x3D; 或 write&#x3D; 作前缀 的筛选器列表会视情况应用于读或写链。</p>
+<p>convert.base64</p>
+<p>convert.base64-encode和 convert.base64-decode使用这两个过滤器等同于分别用base64_encode()和base64_decode()函数处理所有的流数据。convert.base64-encode支持以一个关联数组给出的参数。如果给出了line-length，base64 输出将被用line-length个字符为 长度而截成块。如果给出了line-break-chars，每块将被用给出的字符隔开。这些参数的效果和用base64_encode()再加上 chunk_split()相同。<br>convert.quoted</p>
+<p>convert.quoted-printable-encode和convert.quoted-printable-decode使用此过滤器的decode版本等同于用 quoted_printable_decode()函数处理所有的流数据。没有和convert.quoted-printable-encode相对应的函数。convert.quoted-printable-encode支持以一个关联数组给出的参数。除了支持和convert.base64-encode一样的附加参数外，convert.quoted-printable-encode还支持布尔参数binary和 force-encode-first。convert.base64-decode只支持line-break-chars参数作为从编码载荷中剥离的类型提示。<br>convert.iconv.*</p>
+<p>这个过滤器需要php支持 iconv ，而iconv是默认编译的。使用convert.iconv.*过滤器等同于用iconv()函数处理所有的流数据。</p>
+<p>iconv — 字符串按要求的字符编码来转换</p>
+<p>convery.iconv.*的使用有两种方法:</p>
+<pre class=" language-bash"><code class="language-bash">convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>.<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span> 
+or 
+convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>/<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span>
+</code></pre>
+<h3 id="3、包含图片Getshell"><a href="#3、包含图片Getshell" class="headerlink" title="3、包含图片Getshell"></a><strong>3、包含图片Getshell</strong></h3><p>在上传的图片中写入恶意代码，然后用 LFI 包含调用，就会执行图片里的PHP代码</p>
+
                 
             </div>
             <hr/>
@@ -450,7 +495,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://joyce-art.github.io/2022/08/12/%E5%9B%BE%E8%A7%A3HTTP/">https://joyce-art.github.io/2022/08/12/%E5%9B%BE%E8%A7%A3HTTP/</a>
+                    <a href="https://joyce-art.github.io/2022/08/28/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">https://joyce-art.github.io/2022/08/28/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -487,7 +532,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -837,13 +886,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/08/12/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/">
+                <a href="/2022/08/28/SQL%E6%B3%A8%E5%85%A5/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="网络安全推荐书单">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SQL注入">
                         
-                        <span class="card-title">网络安全推荐书单</span>
+                        <span class="card-title">SQL注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -854,27 +903,15 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-28
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%B9%A6%E7%B1%8D/" class="post-category">
-                                    书籍
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Joyce
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E4%B9%A6%E5%8D%95/">
-                        <span class="chip bg-color">书单</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -886,13 +923,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/08/12/%E5%9B%BE%E8%A7%A3%E5%AF%86%E7%A0%81%E6%8A%80%E6%9C%AF/">
+                <a href="/2022/08/12/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8E%A8%E8%8D%90%E4%B9%A6%E5%8D%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="图解密码技术">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="网络安全推荐书单">
                         
-                        <span class="card-title">图解密码技术</span>
+                        <span class="card-title">网络安全推荐书单</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -920,8 +957,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">
-                        <span class="chip bg-color">密码学</span>
+                    <a href="/tags/%E4%B9%A6%E5%8D%95/">
+                        <span class="chip bg-color">书单</span>
                     </a>
                     
                 </div>
@@ -1111,7 +1148,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.6k</span>
+                        class="white-color">5.5k</span>
             
             
             
