@@ -4,11 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据结构, Joyce&#39;s blog">
-    <meta name="description" content="class BookInfo:
-    def __init__(self ,num, stock, price, priorty):
-        self._number = num
-        self._stock = sto">
+    <meta name="keywords" content="【BUUCTF】学习记录-crypto（填坑ing）, Joyce&#39;s blog">
+    <meta name="description" content="0
+MD5题目：e00cf25ad42683b3df678c61f42c6bda
+flag{admin1}
+一眼就解密题目：下面的字符串解密后便能获得flag：ZmxhZ3tUSEVfRkxBR19PRl9USElTX1NUUklOR30&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数据结构 | Joyce&#39;s blog</title>
+    <title>【BUUCTF】学习记录-crypto（填坑ing） | Joyce&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -350,12 +350,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据结构</h1>
+                    <h1 class="description center-align post-title">【BUUCTF】学习记录-crypto（填坑ing）</h1>
                 </div>
             </div>
         </div>
@@ -377,9 +377,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -391,7 +395,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-16
+                    2022-11-04
                 </div>
                 
 
@@ -400,14 +404,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    405
+                    293
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -427,129 +431,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">BookInfo</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self <span class="token punctuation">,</span>num<span class="token punctuation">,</span> stock<span class="token punctuation">,</span> price<span class="token punctuation">,</span> priorty<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>_number <span class="token operator">=</span> num
-        self<span class="token punctuation">.</span>_stock <span class="token operator">=</span> stock
-        self<span class="token punctuation">.</span>_price <span class="token operator">=</span> price
-        self<span class="token punctuation">.</span>_priority <span class="token operator">=</span> priority
-
-    <span class="token keyword">def</span> <span class="token function">changenum</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_number
-
-    <span class="token keyword">def</span> <span class="token function">changestock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_stock
-
-    <span class="token keyword">def</span> <span class="token function">changeprice</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_price
-
-    <span class="token keyword">def</span> <span class="token function">changepriority</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_priority
-
-    <span class="token keyword">def</span> <span class="token function">change_stock</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>stock<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>_stock <span class="token operator">=</span> stock
-
-    <span class="token keyword">def</span> <span class="token function">change_stock</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>price<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>_price <span class="token operator">=</span> price
-
-    <span class="token keyword">def</span> <span class="token function">change_stock</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>priority<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>_priority <span class="token operator">=</span> priority
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    bookmanage <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    bookmanage<span class="token punctuation">.</span>append<span class="token punctuation">(</span>BookInfo<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    bookmanage<span class="token punctuation">.</span>append<span class="token punctuation">(</span>BookInfo<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    bookmanage<span class="token punctuation">.</span>append<span class="token punctuation">(</span>BookInfo<span class="token punctuation">(</span><span class="token number">3.20</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>bookmanage<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"书号"</span><span class="token punctuation">,</span>bookmanage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>changenum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"库存"</span><span class="token punctuation">,</span>bookmanage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>changestock<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"价格"</span><span class="token punctuation">,</span>bookmanage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>changeprice<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"优先级"</span><span class="token punctuation">,</span>bookmanage<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>changepriority<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Creditcard</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>name<span class="token punctuation">,</span>account<span class="token punctuation">,</span>bank<span class="token punctuation">,</span>limit<span class="token punctuation">,</span>liability<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>username <span class="token operator">=</span> name
-        self<span class="token punctuation">.</span>account <span class="token operator">=</span> account
-        self<span class="token punctuation">.</span>bank <span class="token operator">=</span> bank
-        self<span class="token punctuation">.</span>_limit <span class="token operator">=</span> limit
-        self<span class="token punctuation">.</span>_liability <span class="token operator">=</span> liability
-
-    <span class="token keyword">def</span> <span class="token function">get_name</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_username
-
-    <span class="token keyword">def</span> <span class="token function">get_account</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_account
-
-    <span class="token keyword">def</span> <span class="token function">get_bank</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_bank
-
-    <span class="token keyword">def</span> <span class="token function">get_account</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_limit
-
-    <span class="token keyword">def</span> <span class="token function">get_bank</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_liability
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    cc<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-    cc<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Creditcard<span class="token punctuation">(</span><span class="token string">"syt"</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token string">"平安银行"</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    cc<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Creditcard<span class="token punctuation">(</span><span class="token string">"sxx"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"建设银行"</span><span class="token punctuation">,</span> <span class="token number">20000</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    cc<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Creditcard<span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token string">"农业银行"</span><span class="token punctuation">,</span> <span class="token number">30000</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    cc<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Creditcard<span class="token punctuation">(</span><span class="token string">"two"</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token string">"招商银行"</span><span class="token punctuation">,</span> <span class="token number">400000</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>cc<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span>cc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get_name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"account"</span><span class="token punctuation">,</span> cc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get_account<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"bank"</span><span class="token punctuation">,</span> cc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get_bank<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"limit"</span><span class="token punctuation">,</span> cc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get_limit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token string">"liability"</span><span class="token punctuation">,</span> cc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get_liability<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-</code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">bubble_sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        isexchange <span class="token operator">=</span> <span class="token boolean">False</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"第"</span><span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"轮"</span><span class="token punctuation">)</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">&lt;</span>nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                a<span class="token operator">=</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
-                nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
-                nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span>a
-                isexchange <span class="token operator">=</span> <span class="token boolean">True</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>isexchange <span class="token operator">==</span> <span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> nums
-    <span class="token keyword">return</span> nums
-
-<span class="token keyword">if</span> __name__ <span class="token operator">=</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    arr <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入数组："</span><span class="token punctuation">)</span>
-    nums <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> n <span class="token keyword">in</span> arr<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-
-    num <span class="token operator">=</span> bubble_sort<span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
-</code></pre>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">bubble_sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        isexchange <span class="token operator">=</span> <span class="token boolean">False</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"第"</span><span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"轮"</span><span class="token punctuation">)</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">></span>nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                a<span class="token operator">=</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
-                nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
-                nums<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span>a
-                isexchange <span class="token operator">=</span> <span class="token boolean">True</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>isexchange <span class="token operator">==</span> <span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> nums
-    <span class="token keyword">return</span> nums
-
-<span class="token keyword">if</span> __name__ <span class="token operator">=</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    arr <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"输入数组："</span><span class="token punctuation">)</span>
-    nums <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> n <span class="token keyword">in</span> arr<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-
-    num <span class="token operator">=</span> bubble_sort<span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
-</code></pre>
+                <p>0</p>
+<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>题目：e00cf25ad42683b3df678c61f42c6bda</p>
+<p>flag{admin1}</p>
+<h1 id="一眼就解密"><a href="#一眼就解密" class="headerlink" title="一眼就解密"></a>一眼就解密</h1><p>题目：下面的字符串解密后便能获得flag：ZmxhZ3tUSEVfRkxBR19PRl9USElTX1NUUklOR30&#x3D; 注意：得到的 flag 请包上 flag{} 提交</p>
+<p>flag{THE_FLAG_OF_THIS_STRING}</p>
+<h1 id="Url编码"><a href="#Url编码" class="headerlink" title="Url编码"></a>Url编码</h1><p>题目：%66%6c%61%67%7b%61%6e%64%20%31%3d%31%7d</p>
+<p>flag{and 1&#x3D;1}</p>
+<h1 id="看我回旋踢"><a href="#看我回旋踢" class="headerlink" title="看我回旋踢"></a>看我回旋踢</h1><p>题目：synt{5pq1004q-86n5-46q8-o720-oro5on0417r1}</p>
+<p>flag{5cd1004d-86a5-46d8-b720-beb5ba0417e1}</p>
+<h1 id="摩丝"><a href="#摩丝" class="headerlink" title="摩丝"></a>摩丝</h1><p>题目：.. .-.. — …- . -.– — ..-</p>
+<p>flag{ILOVEYOU}</p>
+<h1 id="password"><a href="#password" class="headerlink" title="password"></a>password</h1><p>题目：姓名：张三<br>生日：19900315</p>
+<p>key格式为key{xxxxxxxxxx}</p>
+<p>flag{zs19900315}</p>
+<h1 id="变异凯撒"><a href="#变异凯撒" class="headerlink" title="变异凯撒"></a>变异凯撒</h1><p>题目：加密密文：afZ_r9VYfScOeO_UL^RWUc<br>格式：flag{ }</p>
+<p>密文有_、^符号，应该联想到ASCII码</p>
+<p>flag{Caesar_variation}</p>
+<h1 id="Quoted-printable"><a href="#Quoted-printable" class="headerlink" title="Quoted-printable"></a>Quoted-printable</h1><p>题目：&#x3D;E9&#x3D;82&#x3D;A3&#x3D;E4&#x3D;BD&#x3D;A0&#x3D;E4&#x3D;B9&#x3D;9F&#x3D;E5&#x3D;BE&#x3D;88&#x3D;E6&#x3D;A3&#x3D;92&#x3D;E5&#x3D;93&#x3D;A6</p>
+<p><a target="_blank" rel="noopener" href="http://web.chacuo.net/charsetquotedprintable">http://web.chacuo.net/charsetquotedprintable</a></p>
+<p>flag{那你也很棒哦}</p>
+<h1 id="Rabbit"><a href="#Rabbit" class="headerlink" title="Rabbit"></a>Rabbit</h1><p>题目：U2FsdGVkX1&#x2F;+ydnDPowGbjjJXhZxm2MP2AgI</p>
+<p>flag{Cute_Rabbit}<br><a target="_blank" rel="noopener" href="http://www.jsons.cn/rabbitencrypt/">http://www.jsons.cn/rabbitencrypt/</a></p>
+<h1 id="篱笆墙的影子"><a href="#篱笆墙的影子" class="headerlink" title="篱笆墙的影子"></a>篱笆墙的影子</h1><p>题目：felhaagv{ewtehtehfilnakgw}</p>
+<p><a target="_blank" rel="noopener" href="http://moersima.00cha.net/shanlan.asp">http://moersima.00cha.net/shanlan.asp</a></p>
+<p>flag{wethinkwehavetheflag}</p>
+<h1 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h1><p>题目：在一次RSA密钥对生成中，假设p&#x3D;473398607161，q&#x3D;4511491，e&#x3D;17<br>求解出d作为flga提交</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1H2OgPzSepvHFMlUbc1rjEg?_at_=1667359527377">https://pan.baidu.com/s/1H2OgPzSepvHFMlUbc1rjEg?_at_=1667359527377</a><br>注意十六进制和十进制</p>
+<p>flag{125631357777427553}</p>
+<h1 id="丢失的MD5"><a href="#丢失的MD5" class="headerlink" title="丢失的MD5"></a>丢失的MD5</h1><p>在cmd里使用python2直接出</p>
+<p>flag{e9032994dabac08080091151380478a2}</p>
+<h1 id="Alice与Bob"><a href="#Alice与Bob" class="headerlink" title="Alice与Bob"></a>Alice与Bob</h1><p><a target="_blank" rel="noopener" href="https://zh.numberempire.com/numberfactorizer.php">https://zh.numberempire.com/numberfactorizer.php</a></p>
 
                 
             </div>
@@ -576,7 +488,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://joyce-art.github.io/2022/09/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">https://joyce-art.github.io/2022/09/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</a>
+                    <a href="https://joyce-art.github.io/2022/11/04/%E3%80%90BUUCTF%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-crypto%EF%BC%88%E5%A1%AB%E5%9D%91ing%EF%BC%89/">https://joyce-art.github.io/2022/11/04/%E3%80%90BUUCTF%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-crypto%EF%BC%88%E5%A1%AB%E5%9D%91ing%EF%BC%89/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -613,7 +525,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -959,17 +875,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/11/03/%E6%97%A0%E6%8E%88%E6%9D%83%E7%BF%BB%E8%AF%91-work-of-art/">
+                <a href="/2022/11/04/%E3%80%90BUUCTF%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-crypto%EF%BC%88%E5%A1%AB%E5%9D%91ing%EF%BC%89/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="(无授权翻译)work of art">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="【BUUCTF】学习记录-crypto（填坑ing）">
                         
-                        <span class="card-title">(无授权翻译)work of art</span>
+                        <span class="card-title">【BUUCTF】学习记录-crypto（填坑ing）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -979,9 +896,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -989,6 +906,15 @@
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1000,13 +926,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/09/02/%E3%80%90%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-web%EF%BC%88%E7%B3%BB%E6%95%B02%EF%BC%89/">
+                <a href="/2022/11/04/%E8%AE%B0%E5%BD%95%E6%9C%AC%E5%AD%A6%E6%9C%9F%E8%A6%81%E5%A1%AB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%88flag%EF%BC%89/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="【攻防世界】学习记录-web（系数2）">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="记录本学期要填的一些坑（flag）">
                         
-                        <span class="card-title">【攻防世界】学习记录-web（系数2）</span>
+                        <span class="card-title">记录本学期要填的一些坑（flag）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1017,7 +943,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-04
                             </span>
                         <span class="publish-author">
                             
@@ -1026,6 +952,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AF%B4%E4%BA%86%E5%A4%A7%E6%A6%82%E7%8E%87%E4%B9%9F%E4%B8%8D%E4%BC%9A%E5%81%9A%E7%9A%84%E8%AE%A1%E5%88%92/">
+                        <span class="chip bg-color">说了大概率也不会做的计划</span>
+                    </a>
+                    
                 </div>
                 
             </div>

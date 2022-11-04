@@ -4,13 +4,19 @@
   
     
     <entry>
-      <title>“test”</title>
-      <link href="/2022/11/04/%E2%80%9Ctest%E2%80%9D/"/>
-      <url>/2022/11/04/%E2%80%9Ctest%E2%80%9D/</url>
+      <title>【BUUCTF】学习记录-crypto（填坑ing）</title>
+      <link href="/2022/11/04/%E3%80%90BUUCTF%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-crypto%EF%BC%88%E5%A1%AB%E5%9D%91ing%EF%BC%89/"/>
+      <url>/2022/11/04/%E3%80%90BUUCTF%E3%80%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-crypto%EF%BC%88%E5%A1%AB%E5%9D%91ing%EF%BC%89/</url>
       
-        <content type="html"><![CDATA[<p>！<a href="Snipaste_2022-11-04_09-56-55.png"></a></p>]]></content>
+        <content type="html"><![CDATA[<p>0</p><h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>题目：e00cf25ad42683b3df678c61f42c6bda</p><p>flag{admin1}</p><h1 id="一眼就解密"><a href="#一眼就解密" class="headerlink" title="一眼就解密"></a>一眼就解密</h1><p>题目：下面的字符串解密后便能获得flag：ZmxhZ3tUSEVfRkxBR19PRl9USElTX1NUUklOR30&#x3D; 注意：得到的 flag 请包上 flag{} 提交</p><p>flag{THE_FLAG_OF_THIS_STRING}</p><h1 id="Url编码"><a href="#Url编码" class="headerlink" title="Url编码"></a>Url编码</h1><p>题目：%66%6c%61%67%7b%61%6e%64%20%31%3d%31%7d</p><p>flag{and 1&#x3D;1}</p><h1 id="看我回旋踢"><a href="#看我回旋踢" class="headerlink" title="看我回旋踢"></a>看我回旋踢</h1><p>题目：synt{5pq1004q-86n5-46q8-o720-oro5on0417r1}</p><p>flag{5cd1004d-86a5-46d8-b720-beb5ba0417e1}</p><h1 id="摩丝"><a href="#摩丝" class="headerlink" title="摩丝"></a>摩丝</h1><p>题目：.. .-.. — …- . -.– — ..-</p><p>flag{ILOVEYOU}</p><h1 id="password"><a href="#password" class="headerlink" title="password"></a>password</h1><p>题目：姓名：张三<br>生日：19900315</p><p>key格式为key{xxxxxxxxxx}</p><p>flag{zs19900315}</p><h1 id="变异凯撒"><a href="#变异凯撒" class="headerlink" title="变异凯撒"></a>变异凯撒</h1><p>题目：加密密文：afZ_r9VYfScOeO_UL^RWUc<br>格式：flag{ }</p><p>密文有_、^符号，应该联想到ASCII码</p><p>flag{Caesar_variation}</p><h1 id="Quoted-printable"><a href="#Quoted-printable" class="headerlink" title="Quoted-printable"></a>Quoted-printable</h1><p>题目：&#x3D;E9&#x3D;82&#x3D;A3&#x3D;E4&#x3D;BD&#x3D;A0&#x3D;E4&#x3D;B9&#x3D;9F&#x3D;E5&#x3D;BE&#x3D;88&#x3D;E6&#x3D;A3&#x3D;92&#x3D;E5&#x3D;93&#x3D;A6</p><p><a href="http://web.chacuo.net/charsetquotedprintable">http://web.chacuo.net/charsetquotedprintable</a></p><p>flag{那你也很棒哦}</p><h1 id="Rabbit"><a href="#Rabbit" class="headerlink" title="Rabbit"></a>Rabbit</h1><p>题目：U2FsdGVkX1&#x2F;+ydnDPowGbjjJXhZxm2MP2AgI</p><p>flag{Cute_Rabbit}<br><a href="http://www.jsons.cn/rabbitencrypt/">http://www.jsons.cn/rabbitencrypt/</a></p><h1 id="篱笆墙的影子"><a href="#篱笆墙的影子" class="headerlink" title="篱笆墙的影子"></a>篱笆墙的影子</h1><p>题目：felhaagv{ewtehtehfilnakgw}</p><p><a href="http://moersima.00cha.net/shanlan.asp">http://moersima.00cha.net/shanlan.asp</a></p><p>flag{wethinkwehavetheflag}</p><h1 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h1><p>题目：在一次RSA密钥对生成中，假设p&#x3D;473398607161，q&#x3D;4511491，e&#x3D;17<br>求解出d作为flga提交</p><p><a href="https://pan.baidu.com/s/1H2OgPzSepvHFMlUbc1rjEg?_at_=1667359527377">https://pan.baidu.com/s/1H2OgPzSepvHFMlUbc1rjEg?_at_=1667359527377</a><br>注意十六进制和十进制</p><p>flag{125631357777427553}</p><h1 id="丢失的MD5"><a href="#丢失的MD5" class="headerlink" title="丢失的MD5"></a>丢失的MD5</h1><p>在cmd里使用python2直接出</p><p>flag{e9032994dabac08080091151380478a2}</p><h1 id="Alice与Bob"><a href="#Alice与Bob" class="headerlink" title="Alice与Bob"></a>Alice与Bob</h1><p><a href="https://zh.numberempire.com/numberfactorizer.php">https://zh.numberempire.com/numberfactorizer.php</a></p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -21,9 +27,15 @@
       <link href="/2022/11/04/%E8%AE%B0%E5%BD%95%E6%9C%AC%E5%AD%A6%E6%9C%9F%E8%A6%81%E5%A1%AB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%88flag%EF%BC%89/"/>
       <url>/2022/11/04/%E8%AE%B0%E5%BD%95%E6%9C%AC%E5%AD%A6%E6%9C%9F%E8%A6%81%E5%A1%AB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%88flag%EF%BC%89/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>大二上学期已经过去了一半，虽然现在立下flag可能也没什么意义了，但我就是爱做这种毫无意义幻想满足自己的事情啊！所以，从几个方面开始</p><hr><p>体育</p><ul><li>5km(28’20内)</li><li>3km(15’0内)</li><li>1.5km(6‘30内)</li><li>运动会取得名次</li></ul><hr><p>竞赛</p><ul><li>BUUCTF以及攻防世界Crypto方向题目（每天12道）</li><li>BUUCTF以及攻防世界Web方向（每天10道）</li><li>羊城杯 2022</li><li>HECTF 2022</li><li>&amp;catf1ag 2022</li><li>N1CTF 2022</li></ul><hr><p>为爱发电</p><ul><li><p>【gyjo】于是我踏上了寻找被遗忘爱人的道路</p></li><li><p>【无cp向】落叶</p></li><li><p>【总统尼】祝愿</p></li><li><p>【总统尼】【论坛体】突然发现网上和我吵架的死对头是教授怎么办？</p><p>虽然大概率不会填，但是可以期待。</p></li></ul><hr>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 说了大概率也不会做的计划 </tag>
+            
+        </tags>
       
     </entry>
     
