@@ -4,22 +4,28 @@
   
     
     <entry>
-      <title>《80x86》</title>
-      <link href="/2022/12/09/%E3%80%8A80x86%E3%80%8B/"/>
-      <url>/2022/12/09/%E3%80%8A80x86%E3%80%8B/</url>
+      <title>逆向基础学习</title>
+      <link href="/2022/12/10/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2022/12/10/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="1-基本名词"><a href="#1-基本名词" class="headerlink" title="1.基本名词"></a>1.基本名词</h1><p><a href="https://www.cnblogs.com/mlgjb/p/7991903.html#:~:text=%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%86%B2%E5%8C%BA.%20%E7%BC%93%E5%86%B2%E5%8C%BA,%28buffer%29%EF%BC%8C%E5%AE%83%E6%98%AF%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E3%80%82.%20%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E5%9C%A8%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E4%B8%AD%E9%A2%84%E7%95%99%E4%BA%86%E4%B8%80%E5%AE%9A%E7%9A%84%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%94%A8%E6%9D%A5%E7%BC%93%E5%86%B2%E8%BE%93%E5%85%A5%E6%88%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%BF%99%E9%83%A8%E5%88%86%E9%A2%84%E7%95%99%E7%9A%84%E7%A9%BA%E9%97%B4%E5%B0%B1%E5%8F%AB%E5%81%9A%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%8C%E6%98%BE%E7%84%B6%E7%BC%93%E5%86%B2%E5%8C%BA%E6%98%AF%E5%85%B7%E6%9C%89%E4%B8%80%E5%AE%9A%E5%A4%A7%E5%B0%8F%E7%9A%84%E3%80%82.%20%E7%BC%93%E5%86%B2%E5%8C%BA%E6%A0%B9%E6%8D%AE%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E6%98%AF%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87%E8%BF%98%E6%98%AF%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%88%86%E4%B8%BA%E8%BE%93%E5%85%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E5%92%8C%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2%E5%8C%BA%E3%80%82">https://www.cnblogs.com/mlgjb/p/7991903.html#:~:text=%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%86%B2%E5%8C%BA.%20%E7%BC%93%E5%86%B2%E5%8C%BA,%28buffer%29%EF%BC%8C%E5%AE%83%E6%98%AF%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E3%80%82.%20%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E5%9C%A8%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E4%B8%AD%E9%A2%84%E7%95%99%E4%BA%86%E4%B8%80%E5%AE%9A%E7%9A%84%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%94%A8%E6%9D%A5%E7%BC%93%E5%86%B2%E8%BE%93%E5%85%A5%E6%88%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%BF%99%E9%83%A8%E5%88%86%E9%A2%84%E7%95%99%E7%9A%84%E7%A9%BA%E9%97%B4%E5%B0%B1%E5%8F%AB%E5%81%9A%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%8C%E6%98%BE%E7%84%B6%E7%BC%93%E5%86%B2%E5%8C%BA%E6%98%AF%E5%85%B7%E6%9C%89%E4%B8%80%E5%AE%9A%E5%A4%A7%E5%B0%8F%E7%9A%84%E3%80%82.%20%E7%BC%93%E5%86%B2%E5%8C%BA%E6%A0%B9%E6%8D%AE%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E6%98%AF%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87%E8%BF%98%E6%98%AF%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%88%86%E4%B8%BA%E8%BE%93%E5%85%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E5%92%8C%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2%E5%8C%BA%E3%80%82</a>.</p><p>【缓存区与缓存与缓冲】</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 逆向学习 </tag>
+            
+        </tags>
       
     </entry>
     
     
     
     <entry>
-      <title>《80x》</title>
-      <link href="/2022/12/09/%E3%80%8A80x%E3%80%8B/"/>
-      <url>/2022/12/09/%E3%80%8A80x%E3%80%8B/</url>
+      <title>《80x86》</title>
+      <link href="/2022/12/09/%E3%80%8A80x86%E3%80%8B/"/>
+      <url>/2022/12/09/%E3%80%8A80x86%E3%80%8B/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -43,19 +49,6 @@
             <tag> 逆向 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>《有毒》</title>
-      <link href="/2022/12/07/%E3%80%8A%E6%9C%89%E6%AF%92%E3%80%8B/"/>
-      <url>/2022/12/07/%E3%80%8A%E6%9C%89%E6%AF%92%E3%80%8B/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
@@ -100,19 +93,6 @@
     
     
     <entry>
-      <title>SQL注入之DVWA</title>
-      <link href="/2022/11/06/SQL%E6%B3%A8%E5%85%A5%E4%B9%8BDVWA/"/>
-      <url>/2022/11/06/SQL%E6%B3%A8%E5%85%A5%E4%B9%8BDVWA/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>六级</title>
       <link href="/2022/11/05/%E5%85%AD%E7%BA%A7/"/>
       <url>/2022/11/05/%E5%85%AD%E7%BA%A7/</url>
@@ -143,25 +123,6 @@
         <tags>
             
             <tag> 笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>记录本学期要填的一些坑（flag）</title>
-      <link href="/2022/11/04/%E8%AE%B0%E5%BD%95%E6%9C%AC%E5%AD%A6%E6%9C%9F%E8%A6%81%E5%A1%AB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%88flag%EF%BC%89/"/>
-      <url>/2022/11/04/%E8%AE%B0%E5%BD%95%E6%9C%AC%E5%AD%A6%E6%9C%9F%E8%A6%81%E5%A1%AB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%88flag%EF%BC%89/</url>
-      
-        <content type="html"><![CDATA[<p>大二上学期已经过去了一半，虽然现在立下flag可能也没什么意义了，但我就是爱做这种毫无意义幻想满足自己的事情啊！所以，从几个方面开始</p><hr><p>体育</p><ul><li>5km(28’20内)</li><li>3km(15’0内)</li><li>1.5km(6‘30内)</li><li>运动会取得名次</li></ul><hr><p>竞赛</p><ul><li>BUUCTF以及攻防世界Crypto方向题目（每天12道）</li><li>BUUCTF以及攻防世界Web方向（每天10道）</li><li>羊城杯 2022</li><li>HECTF 2022</li><li>&amp;catf1ag 2022</li><li>N1CTF 2022</li></ul><hr><p>为爱发电</p><ul><li><p>【gyjo】于是我踏上了寻找被遗忘爱人的道路</p></li><li><p>【无cp向】落叶</p></li><li><p>【总统尼】祝愿</p></li><li><p>【总统尼】【论坛体】突然发现网上和我吵架的死对头是教授怎么办？</p><p>虽然大概率不会填，但是可以期待。</p></li></ul><hr><p>学习</p><ul><li>Python</li><li>C语言</li><li>数据结构</li><li>汇编语言</li><li>六级</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 说了大概率也不会做的计划 </tag>
             
         </tags>
       
@@ -368,19 +329,6 @@
             <tag> 笔记 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>想对你说的话</title>
-      <link href="/2022/08/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
-      <url>/2022/08/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
